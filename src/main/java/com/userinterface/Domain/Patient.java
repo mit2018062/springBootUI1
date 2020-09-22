@@ -28,7 +28,9 @@ public class Patient {
 		this.dob = dob;
 	}
 
-
+    public Patient() {
+    	super();
+    }
    public int getAge() {
         return age;
     }

@@ -28,77 +28,65 @@
 
     <h2>Patient Details</h2>
     <div>
-        <form class="form-horizontal" th:object="${patientForm}" th:action="@{/patient}" method="post">
+        <form class="form-horizontal" th:object="${patient}" th:action="@{/patient/save}" method="post">
 
-            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                 <p th:text="#{form.hasErrors}">Error Message</p>
-            </div>
-
-            <input type="hidden" th:field="*{id}"/>
-
-            <div class="form-group" th:class="${#fields.hasErrors('fname')} ? 'form-group has-error' : 'form-group'">
-                <label class="col-sm-2 control-label">First Name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{fname}" th:errorclass="has-error" pattern = "[A-Za-z0-9]{0,10}" title="You can enter these field values [A-Za-z0-9]" required/>
-
-                    <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('fname')}" th:text="${err}" />
-                       </ul>
-                    </span>
-                </div>
-            </div>
-
-             <div class="form-group" th:class="${#fields.hasErrors('lname')} ? 'form-group has-error' : 'form-group'">
-                <label class="col-sm-2 control-label">Last Name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{lname}" th:errorclass="has-error" pattern = "[A-Za-z0-9]{0,10}" title="You can enter these field values [A-Za-z0-9]" required/>
-
-                    <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('lname')}" th:text="${err}" />
-                       </ul>
-                    </span>
-                </div>
-            </div>
-
-            <!--<div class="form-group" th:class="${#fields.hasErrors('age')} ? 'form-group has-error' : 'form-group'">
-                <label class="col-sm-2 control-label">Age:</label>
-                <div class="col-sm-10">
-                    <input type="number" min="0" max="5000" step="0.01" class="form-control" th:field="*{age}" th:errorclass="has-error"/>
-
-                    <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('age')}" th:text="${err}" />
-                       </ul>
-                    </span>
-                </div>
             </div>-->
 
+            <!--<input type="hidden" th:field="*{id}"/>-->
 
-            <div class="form-group" th:class="${#fields.hasErrors('dob')} ? 'form-group has-error' : 'form-group'">
+			<div class="form-group" >
+                <label class="col-sm-2 control-label">Pid:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{pid}"  pattern = "[A-Za-z0-9]{0,10}" title="You can enter these field values [A-Za-z0-9]" required/>
+
+                    
+                </div>
+           
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">First Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{firstname}"  pattern = "[A-Za-z0-9]{0,10}" title="You can enter these field values [A-Za-z0-9]" required/>
+
+                   
+                </div>
+            </div>
+
+             <div class="form-group" >
+                <label class="col-sm-2 control-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{lastname}" pattern = "[A-Za-z0-9]{0,10}" title="You can enter these field values [A-Za-z0-9]" required/>
+
+                  
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <label class="col-sm-2 control-label">Age:</label>
+                <div class="col-sm-10">
+                    <input type="number" min="0" max="5000" step="0.01" class="form-control" th:field="*{age}" />
+
+                   
+                </div>
+            </div>
+
+
+            <div class="form-group" >
                 <label class="col-sm-2 control-label">Date of Birth:</label>
                 <div class="col-sm-10">
                     
-                    <input type="date" class="form-control" th:field="*{dob}" th:errorclass="has-error" max = '2020-09-18'/>
-                    <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('dob')}" th:text="${err}" />
-                       </ul>
-                    </span>
+                    <input type="date" class="form-control" th:field="*{dob}"  max = '2020-09-18'/>
+                  
                 </div>
             </div>
-            <div class="form-group" th:class="${#fields.hasErrors('gender')} ? 'form-group has-error' : 'form-group'">
+            <div class="form-group" >
                 <label class="col-sm-2 control-label">Gender:</label>
                 <div class="col-sm-10">
-                    <!--<input type="text" class="form-control" th:field="*{gender}" th:errorclass="has-error"/>-->
+                    <!--<input type="text" class="form-control" th:field="*{gender}" />-->
                 <input type="radio" th:field="*{gender}" value="Male" checked="checked"/>Male
         <input type="radio" th:field="*{gender}" value="Female" />Female
-                    <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('gender')}" th:text="${err}" />
-                       </ul>
-                    </span>
+                    
                 </div>
             </div>
             <div class="wrapper">
