@@ -1,5 +1,6 @@
 package com.userinterface.Domain;
 
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -8,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Patient {
+public class PatientForm {
     
     private String pid;
     private String firstname;
@@ -17,21 +18,21 @@ public class Patient {
     private String gender;
     
     
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    //private LocalDate dob;
+   @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dob;
 
     
-    public Patient( String firstname, String lastname, String gender) {
+    public PatientForm( String firstname, String lastname, String gender,LocalDate dob) {
 		super();
-		this.pid = pid;
+		//this.pid = pid;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.age = age;
+		//this.age = age;
 		this.gender = gender;
-		//this.dob = dob;
+		this.dob = dob;
 	}
 
-    public Patient() {
+    public PatientForm() {
     	super();
     }
    public int getAge() {
@@ -73,7 +74,7 @@ public class Patient {
         this.lastname = lastname;
     }
 
-   /* public LocalDate getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
@@ -81,5 +82,5 @@ public class Patient {
         
         this.age = Period.between(dob, LocalDate.now()).getYears();
         this.dob = dob;
-    }*/
+    }
 }
