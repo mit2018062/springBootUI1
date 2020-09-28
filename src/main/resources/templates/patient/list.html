@@ -21,21 +21,22 @@
         <h2 style="text-align:center"> Patient List</h2>
         <table class="table table-striped">
             <tr>
-                <th>Id</th>
+                <th>Patient Id</th>
                 <!--<th>Patient ID</th>-->
                 <th>First Name</th>
                 <th>Last Name</th>
-                <!--<th>Age</th>-->
+                <th>Age</th>
                 <th>Gender</th>
-               
+				<!--<th>DOB</th>-->
             </tr>
             <tr th:each="patient : ${patients}">
                 <!--<td th:text="${patient.id.toHexString()}"></td>-->
-                <td th:text="${patient.alphaid}"></td>
-                <td th:text="${patient.fname}"></td>
-                <td th:text="${patient.lname}"></td>
-                <!--<td th:text="${patient.age}"></td>-->
+                <td th:text="${patient.pid}"></td>
+                <td th:text="${patient.firstname}"></td>
+                <td th:text="${patient.lastname}"></td>
+                <td th:text="${patient.age}"></td>
                 <td th:text="${patient.gender}"></td>
+				<!--<td th:text="${patient.dob}"></td>-->
                 
             </tr>
         </table>
