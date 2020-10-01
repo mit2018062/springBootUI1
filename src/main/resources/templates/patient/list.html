@@ -13,6 +13,7 @@
 
     <link href="../../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" type="test/css" href="src/main/resources/static/patientform.css">      
 </head>
 <body>
 
@@ -41,8 +42,13 @@
             </tr>
         </table>
     </div>
+    <div>&nbsp;</div>
     <div>
-        Total Items : [[${totalItems}]]
+        Total Items : [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+        &nbsp; -&nbsp;
+        <span th:each="i: ${#numbers.sequence(0,totalPages-1)} ">
+            <a th:href="@{${i}}">[[${i}]] </a> &nbsp;&nbsp;
+        </span>
     </div>
 
     <div class="row">

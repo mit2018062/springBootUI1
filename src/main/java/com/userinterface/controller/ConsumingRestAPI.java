@@ -36,6 +36,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.userinterface.services.PatientService;
+import com.userinterface.Domain.PageHandlers;
 import com.userinterface.Domain.Patient;
 import com.userinterface.Domain.PatientForm;
 
@@ -100,7 +101,7 @@ public class ConsumingRestAPI {
    @RequestMapping("/")
     public String redirToList(){
     	System.out.println("Inside Controller /");
-        return "redirect:/patient/list";
+        return "redirect:/patient/list/0";
     } 
        
 	/*@GetMapping("/patient/list")
@@ -112,16 +113,20 @@ public class ConsumingRestAPI {
 	        //return restTemplate.getForObject(URL, String.class);
      }*/
      
-     @GetMapping("/patient/list/{page}" )
-	 public String listPatient(Model model, @PathVariable String page ) {
+     @GetMapping("/patient/list/{pageno}" )
+	 public String listPatient(Model model, @PathVariable String pageno ) {
              //System.out.println(restTemplate.getForObject(URL, String.class));
-            /*long totalItems = page.getNumberOfElements();
-            int totalPages = page.getTotalPages();
-            model.addAttribute("totalItems",totalItems);
-            model.addAttribute("totalPages",totalPages); */
-            int i = Integer.parseInt(page);  
+            
+            PageHandlers page = patientService.listAll(pageno) ; 
+            int i = Integer.parseInt(pageno); 
+            int currentPage = 1; 
             System.out.println(i);
-	        model.addAttribute("patients", patientService.listAll());
+            long totalItems = page.getNumberOfElements();
+            int totalPages = page.getTotalPages();
+            model.addAttribute("currentPage",currentPage);
+            model.addAttribute("totalItems",totalItems);
+            model.addAttribute("totalPages",totalPages); 
+	        model.addAttribute("patients", page.getContent());
 	        return "patient/list";
 	        //return restTemplate.getForObject(URL, String.class);
      }

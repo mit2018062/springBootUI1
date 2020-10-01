@@ -37,7 +37,7 @@ public class PatientServiceImpl implements PatientService {
 		
 	}*/
 
-	private static String URL = "https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/list";
+	private static String URL = "https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/list/";
 	private static String URL1 ="https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient?name=";
 	//private static String URL1 ="http://localhost:8080/patient?firstname=annu";
 	private static String URL3 = "https://8082-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/test?page=0&size=50";
@@ -130,58 +130,46 @@ public class PatientServiceImpl implements PatientService {
     }*/
 	
      @Override
-	public List<Patient> listAll() {
+	public PageHandlers listAll(String pageno) {
         System.out.println("inside service imp");
-       
-		List<Patient> patients = new ArrayList<>();
+        PageHandlers ppl2 = new PageHandlers();
+		//List<Patient> patients = new ArrayList<>();
 		ObjectMapper mapper = new ObjectMapper();
 		//DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		//mapper.setDateFormat(df);
 		//String json1 ="[{ \"firstname\" : \"shan\", \"lastname\" : \"rahu\",\"gender\" : \"male\" }]";
 		try {
-             System.out.println("B4 b4 json convert");
-            System.out.println(restTemplate.getForObject(URL, String.class));
-             System.out.println("B4 json convert");
+            System.out.println("B4 b4 json convert");
+            System.out.println(restTemplate.getForObject(URL+pageno, String.class));
+            System.out.println("B4 json convert");
             //List<Patient> ppl2 = Arrays.asList(mapper.readValue(restTemplate.getForObject(URL, String.class), Patient[].class));
-            PageHandlers ppl2 = mapper.readValue(restTemplate.getForObject(URL, String.class), PageHandlers.class);
-            List<Patient> ppl3 = ppl2.getContent(); 
-            System.out.println("After json convert");
-            System.out.println(ppl2.getTotalElements());
-            System.out.println(ppl2.getContent().toString());
-            System.out.println(ppl2.getSort().isSorted());
-            System.out.println("After json convert 3");
+        
+            ppl2 = mapper.readValue(templateCall(URL+pageno), PageHandlers.class);
+            //List<Patient> ppl3 = ppl2.getContent(); 
+            
+            System.out.println(ppl2.getTotalElements()+" & " +ppl2.getTotalPages());
+            
             //Object p = restTemplate.getForObject(URL3, Object.class);
-            System.out.println("\nJSON array to List of objectsss");
-             
+            System.out.println("\nJSON array to List of objectsss"); 
 	         
-	           //.stream().forEach(x -> System.out.println(x.getFirstname(),x.getLastName()));
-	          // ppl2.stream().forEach(x ->System.out.printf("First Name: %s\nLast Name: %s",x.getFirstname(), x.getLastname()));
-	         ppl3.stream().forEach(patients::add);
-			/*Patient p = mapper.readValue(json1,Patient.class);
-			System.out.println(p.getFirstname());*/
+	        //.stream().forEach(x -> System.out.println(x.getFirstname(),x.getLastName()));
+	        // ppl2.stream().forEach(x ->System.out.printf("First Name: %s\nLast Name: %s",x.getFirstname(), x.getLastname()));
+	         //ppl3.stream().forEach(patients::add);	
 			
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RestClientException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-	 	//System.out.println(restTemplate.getForObject(URL, String.class));
-		//String p = restTemplate.getForObject(URL, String.class);
-        //model.addAttribute("patients", list);
-        //System.out.println(p);
-        //return "patient/list";
-        return patients;
-        //return restTemplate.getForObject(URL, String.class);
+        return ppl2;
 
     }
-	/*public String listAll(){
-		return restTemplate.getForObject(URL, String.class);
-	}*/
+
+	public String templateCall(String url){
+		return restTemplate.getForObject(url, String.class);
+	}
 	
 	/*@Override
 	public List<Patient> listAll() {
@@ -190,6 +178,7 @@ public class PatientServiceImpl implements PatientService {
 		System.out.println(Arrays.asList(list));
 		return p;
 	}*/
+    
 
 	
 	@Override
