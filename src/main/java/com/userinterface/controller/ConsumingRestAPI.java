@@ -12,6 +12,7 @@ import javax.validation.Valid;
 //import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.databind.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -48,7 +49,7 @@ public class ConsumingRestAPI {
 	
 	//private static String URL = "http://localhost:8080/patient/list";
 	//private static String URL1 ="http://localhost:8071/patient?name";
-	private static String URL3 = "https://8081-f503f150-e525-4e37-8c3c-6011c3b414df.ws-us02.gitpod.io/patient/";
+	private static String URL3 = "https://8081-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/";
 	/*@GetMapping("/patient/list")
 	public Patient getPatients() {
 
@@ -102,14 +103,31 @@ public class ConsumingRestAPI {
         return "redirect:/patient/list";
     } 
        
-	@GetMapping("/patient/list")
+	/*@GetMapping("/patient/list")
 	 public String listPatient(Model model) {
-		 	//System.out.println(restTemplate.getForObject(URL, String.class));
+             //System.out.println(restTemplate.getForObject(URL, String.class));
+
 	        model.addAttribute("patients", patientService.listAll());
 	        return "patient/list";
 	        //return restTemplate.getForObject(URL, String.class);
-	 }
-	
+     }*/
+     
+     @GetMapping("/patient/list/{page}" )
+	 public String listPatient(Model model, @PathVariable String page ) {
+             //System.out.println(restTemplate.getForObject(URL, String.class));
+            /*long totalItems = page.getNumberOfElements();
+            int totalPages = page.getTotalPages();
+            model.addAttribute("totalItems",totalItems);
+            model.addAttribute("totalPages",totalPages); */
+            int i = Integer.parseInt(page);  
+            System.out.println(i);
+	        model.addAttribute("patients", patientService.listAll());
+	        return "patient/list";
+	        //return restTemplate.getForObject(URL, String.class);
+     }
+	   
+        
+
 	@RequestMapping(value = "/patient/search")
     public String searchName() {
         System.out.println("Hi search");
@@ -118,8 +136,17 @@ public class ConsumingRestAPI {
 
     }
 
-    @GetMapping(value = "/Search")
+    /*@GetMapping(value = "/Search")
     public String search(@RequestParam(value = "name") String name, Model model) {
+        System.out.println(name);
+        model.addAttribute("patients", patientService.getByFnameAndLname(name));
+        System.out.println("8");
+        return "/patient/searchlist";
+    }*/
+
+    
+    @GetMapping(value = "/Search")
+    public String search(@RequestParam(value = "name") String name, Model model,Pageable p) {
         System.out.println(name);
         model.addAttribute("patients", patientService.getByFnameAndLname(name));
         System.out.println("8");

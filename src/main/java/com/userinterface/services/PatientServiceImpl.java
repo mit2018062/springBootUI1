@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.userinterface.Domain.PageHandlers;
 import com.userinterface.Domain.Patient;
 import com.userinterface.Domain.PatientForm;
 
@@ -34,17 +37,19 @@ public class PatientServiceImpl implements PatientService {
 		
 	}*/
 
-	private static String URL = "https://8080-f503f150-e525-4e37-8c3c-6011c3b414df.ws-us02.gitpod.io/patient/list";
-	private static String URL1 ="https://8080-f503f150-e525-4e37-8c3c-6011c3b414df.ws-us02.gitpod.io/patient?name=";
+	private static String URL = "https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/list";
+	private static String URL1 ="https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient?name=";
 	//private static String URL1 ="http://localhost:8080/patient?firstname=annu";
-	
+	private static String URL3 = "https://8082-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/test?page=0&size=50";
 	 /*@Override
 	public List<Patient> listAll() {
 		   List<Patient> patients = new ArrayList<>();
 		   restTemplate.getForObject(URL, Patient.class).forEach(patients::add); // fun with Java 8
 		   return patients;
-	}*/
-	@Override
+    }*/
+    //List<Patient> listPatients = page.getContent();
+
+	/*@Override
 	public List<Patient> listAll() {
 		System.out.println("inside service imp");
 		List<Patient> patients = new ArrayList<>();
@@ -60,6 +65,98 @@ public class PatientServiceImpl implements PatientService {
 	           //.stream().forEach(x -> System.out.println(x.getFirstname(),x.getLastName()));
 	          // ppl2.stream().forEach(x ->System.out.printf("First Name: %s\nLast Name: %s",x.getFirstname(), x.getLastname()));
 	         ppl2.stream().forEach(patients::add);
+			/*Patient p = mapper.readValue(json1,Patient.class);
+			System.out.println(p.getFirstname());*/
+			
+		/*} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RestClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	 	//System.out.println(restTemplate.getForObject(URL, String.class));
+		//String p = restTemplate.getForObject(URL, String.class);
+        //model.addAttribute("patients", list);
+        //System.out.println(p);
+        //return "patient/list";
+        return patients;
+        //return restTemplate.getForObject(URL, String.class);
+
+    }*/
+    
+    /*@Override
+	public List<Patient> listAll() {
+        System.out.println("inside service imp");
+       
+		List<Patient> patients = new ArrayList<>();
+		ObjectMapper mapper = new ObjectMapper();
+		//DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		//mapper.setDateFormat(df);
+		//String json1 ="[{ \"firstname\" : \"shan\", \"lastname\" : \"rahu\",\"gender\" : \"male\" }]";
+		try {
+			
+			 List<Patient> ppl2 = Arrays.asList(mapper.readValue(restTemplate.getForObject(URL, String.class), Patient[].class));
+             
+	         System.out.println("\nJSON array to List of objectsss");
+	         
+	           //.stream().forEach(x -> System.out.println(x.getFirstname(),x.getLastName()));
+	          // ppl2.stream().forEach(x ->System.out.printf("First Name: %s\nLast Name: %s",x.getFirstname(), x.getLastname()));
+	         ppl2.stream().forEach(patients::add);
+			/*Patient p = mapper.readValue(json1,Patient.class);
+			System.out.println(p.getFirstname());*/
+			
+		/*} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RestClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	 	//System.out.println(restTemplate.getForObject(URL, String.class));
+		//String p = restTemplate.getForObject(URL, String.class);
+        //model.addAttribute("patients", list);
+        //System.out.println(p);
+        //return "patient/list";
+        return patients;
+        //return restTemplate.getForObject(URL, String.class);
+
+    }*/
+	
+     @Override
+	public List<Patient> listAll() {
+        System.out.println("inside service imp");
+       
+		List<Patient> patients = new ArrayList<>();
+		ObjectMapper mapper = new ObjectMapper();
+		//DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		//mapper.setDateFormat(df);
+		//String json1 ="[{ \"firstname\" : \"shan\", \"lastname\" : \"rahu\",\"gender\" : \"male\" }]";
+		try {
+             System.out.println("B4 b4 json convert");
+            System.out.println(restTemplate.getForObject(URL, String.class));
+             System.out.println("B4 json convert");
+            //List<Patient> ppl2 = Arrays.asList(mapper.readValue(restTemplate.getForObject(URL, String.class), Patient[].class));
+            PageHandlers ppl2 = mapper.readValue(restTemplate.getForObject(URL, String.class), PageHandlers.class);
+            List<Patient> ppl3 = ppl2.getContent(); 
+            System.out.println("After json convert");
+            System.out.println(ppl2.getTotalElements());
+            System.out.println(ppl2.getContent().toString());
+            System.out.println(ppl2.getSort().isSorted());
+            System.out.println("After json convert 3");
+            //Object p = restTemplate.getForObject(URL3, Object.class);
+            System.out.println("\nJSON array to List of objectsss");
+             
+	         
+	           //.stream().forEach(x -> System.out.println(x.getFirstname(),x.getLastName()));
+	          // ppl2.stream().forEach(x ->System.out.printf("First Name: %s\nLast Name: %s",x.getFirstname(), x.getLastname()));
+	         ppl3.stream().forEach(patients::add);
 			/*Patient p = mapper.readValue(json1,Patient.class);
 			System.out.println(p.getFirstname());*/
 			
@@ -81,10 +178,7 @@ public class PatientServiceImpl implements PatientService {
         return patients;
         //return restTemplate.getForObject(URL, String.class);
 
-	}
-	
-
-	
+    }
 	/*public String listAll(){
 		return restTemplate.getForObject(URL, String.class);
 	}*/
