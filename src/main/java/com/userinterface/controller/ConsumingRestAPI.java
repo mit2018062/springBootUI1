@@ -119,13 +119,13 @@ public class ConsumingRestAPI {
             
             PageHandlers page = patientService.listAll(pageno) ; 
             int i = Integer.parseInt(pageno); 
-            int currentPage = 1; 
+            
             System.out.println(i);
             long totalItems = page.getNumberOfElements();
             int totalPages = page.getTotalPages();
-            model.addAttribute("currentPage",currentPage);
+            model.addAttribute("currentPage",i);
             model.addAttribute("totalItems",totalItems);
-            model.addAttribute("totalPages",totalPages); 
+            model.addAttribute("totalPages",totalPages-1); 
 	        model.addAttribute("patients", page.getContent());
 	        return "patient/list";
 	        //return restTemplate.getForObject(URL, String.class);

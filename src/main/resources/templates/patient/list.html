@@ -13,7 +13,7 @@
 
     <link href="../../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
-    <link rel="stylesheet" type="test/css" href="src/main/resources/static/patientform.css">      
+    <link rel="stylesheet" type="test/css" href="patientform.css">      
 </head>
 <body>
 
@@ -46,9 +46,24 @@
     <div>
         Total Items : [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
         &nbsp; -&nbsp;
-        <span th:each="i: ${#numbers.sequence(0,totalPages-1)} ">
-            <a th:href="@{${i}}">[[${i}]] </a> &nbsp;&nbsp;
+
+        <a th:if="${currentPage > 0}"  th:href="@{0}">First</a>
+        <span th:unless= "${currentPage > 0}" >First</span>
+        &nbsp;
+        <a th:if="${currentPage > 0}" th:href="@{${currentPage}-1}">Previous</a>
+        <span th:unless= "${currentPage > 0}" >Previous</span>
+        &nbsp;
+        <span th:each="i: ${#numbers.sequence(0,totalPages)} ">
+            <a th:if="${i != currentPage}" th:href="@{${i}}">[[${i}]] </a> 
+            <span th:unless="${i != currentPage}" > [[${i}]] </span>
+            &nbsp;&nbsp;
         </span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{${currentPage}+1}">Next</a>
+        <span th:unless= "${currentPage < totalPages}" >Next</span>
+        &nbsp;&nbsp;
+        <a th:if="${currentPage < totalPages}" th:href="@{${totalPages}}">Last</a>
+        <span th:unless= "${currentPage < totalPages}" >Last</span>    
     </div>
 
     <div class="row">
