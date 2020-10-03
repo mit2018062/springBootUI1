@@ -50,7 +50,7 @@ public class ConsumingRestAPI {
 	
 	//private static String URL = "http://localhost:8080/patient/list";
 	//private static String URL1 ="http://localhost:8071/patient?name";
-	private static String URL3 = "https://8081-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/";
+	private static String URL3 = "https://8081-dcc8bdb6-a546-4f22-ae00-9d64de6c5237.ws-us02.gitpod.io/patient/";
 	/*@GetMapping("/patient/list")
 	public Patient getPatients() {
 
@@ -151,9 +151,9 @@ public class ConsumingRestAPI {
 
     
     @GetMapping(value = "/Search")
-    public String search(@RequestParam(value = "name") String name, Model model,Pageable p) {
+    public String search(@RequestParam(value = "name") String name, Model model,@PathVariable String pno) {
         System.out.println(name);
-        model.addAttribute("patients", patientService.getByFnameAndLname(name));
+        model.addAttribute("patients", patientService.getByFnameAndLname(pno,name));
         System.out.println("8");
         return "/patient/searchlist";
     }

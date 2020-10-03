@@ -37,8 +37,8 @@ public class PatientServiceImpl implements PatientService {
 		
 	}*/
 
-	private static String URL = "https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient/list/";
-	private static String URL1 ="https://8084-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/patient?name=";
+	private static String URL = "https://8084-dcc8bdb6-a546-4f22-ae00-9d64de6c5237.ws-us02.gitpod.io/patient/list/";
+	private static String URL1 ="https://8084-dcc8bdb6-a546-4f22-ae00-9d64de6c5237.ws-us02.gitpod.io/patient/";
 	//private static String URL1 ="http://localhost:8080/patient?firstname=annu";
 	private static String URL3 = "https://8082-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/test?page=0&size=50";
 	 /*@Override
@@ -200,7 +200,7 @@ public class PatientServiceImpl implements PatientService {
 		return patient;
 	}
 
-
+/*
 	@Override
     public List<Patient> getByFnameAndLname(String name) {
         //List<Patient> patients = new ArrayList<>();
@@ -232,6 +232,39 @@ public class PatientServiceImpl implements PatientService {
        return patients;
 
     }
+*/
+    @Override
+    public PageHandlers getByFnameAndLname(String pno , String name) {
+        //List<Patient> patients = new ArrayList<>();
+        //patientRepository.getByFnameAndLname(name).forEach(patients::add);
+        //return patients;
+        System.out.println("inside service imp");
+        System.out.println(name);
+		PageHandlers ppl2 = new PageHandlers();
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			System.out.println("inside try");
+			 ppl2 = mapper.readValue(restTemplate.getForObject(URL1+pno+"?name="+name , String.class), PageHandlers.class);
+	         System.out.println("\nJSON array to List of objectsssearch");
+	         //System.out.println(URL1+"name");
+	  
+	         //ppl3.stream().forEach(patients::add);
+			
+			
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RestClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+       return ppl2;
+
+    }
+
 
 
 

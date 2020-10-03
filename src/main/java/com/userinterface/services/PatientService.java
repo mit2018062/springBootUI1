@@ -11,7 +11,8 @@ public interface PatientService {
 	public Patient getById(String id);
 	public Patient saveOrUpdatePatient(Patient patient);
 	//public Patient getByFnameAndLname(String name);
-	List<Patient> getByFnameAndLname(String name);
+	//List<Patient> getByFnameAndLname(String name);
 	Patient saveOrUpdatePatientForm(PatientForm patientForm);
-	public PageHandlers listAll(String pageno);
+    public PageHandlers listAll(String pageno);
+    public PageHandlers getByFnameAndLname(String pno,String name);
 }

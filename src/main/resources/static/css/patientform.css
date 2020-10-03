@@ -63,3 +63,16 @@ label {
 .links {
     text-align: center;
 }
+table {
+    border-collapse:collapse;
+    width: 400px; 
+    height: 400px;
+}
+td {
+    text-align: left;
+}
+
+table, th, td{
+    border: 1px solid black;
+    
+}
