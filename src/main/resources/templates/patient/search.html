@@ -31,7 +31,7 @@
 
     <h2 style="text-align:center">Patient Details</h2>
     <div>
-        <form class="form-horizontal"  th:action="@{/Search}" method="get">
+        <form class="form-horizontal"  th:action="@{/Search/0}" method="get">
 
            <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                 <p th:text="#{form.hasErrors}">Error Message</p>
@@ -62,7 +62,7 @@
     </div>
         </form>
         <div class="col-sm-3">
-                <a href="/patient/list">Home</a>
+                <a href="/patient/list/0">Home</a>
         </div>
     </div>
 </div>

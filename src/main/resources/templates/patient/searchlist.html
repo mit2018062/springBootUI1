@@ -43,6 +43,30 @@
             </tr>
         </table>
     </div>
+    <div>&nbsp;</div>
+    <div>
+        Total Items : [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+        &nbsp; -&nbsp;
+
+        <a th:if="${currentPage > 0}"  th:href="@{0  + '?name=' + ${name}}">First</a>
+        <span th:unless= "${currentPage > 0}" >First</span>
+        &nbsp;
+        <a th:if="${currentPage > 0}" th:href="@{${currentPage}-1 + '?name=' + ${name}}">Previous</a>
+        <span th:unless= "${currentPage > 0}" >Previous</span>
+        &nbsp;
+        <span th:each="i: ${#numbers.sequence(0,totalPages)} ">
+            <a th:if="${i != currentPage}" th:href="@{${i}  + '?name=' + ${name}}">[[${i}]] </a> 
+            <span th:unless="${i != currentPage}" > [[${i}]] </span>
+            &nbsp;&nbsp;
+        </span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{${currentPage}+1  + '?name=' + ${name}}">Next</a>
+        <span th:unless= "${currentPage < totalPages}" >Next</span>
+        &nbsp;&nbsp;
+        <a th:if="${currentPage < totalPages}" th:href="@{${totalPages}  + '?name=' + ${name}}">Last</a>
+        <span th:unless= "${currentPage < totalPages}" >Last</span>    
+    </div>
+
     <div class="links">
         <div class="col-sm-3">
             <a href="/patient/new">New Patient</a>
@@ -51,7 +75,7 @@
             <a href="/patient/search">Search Patient</a>
         </div>
         <div class="col-sm-3">
-            <a href="/patient/list">Home</a>
+            <a href="/patient/list/0">Home</a>
         </div>
     </div>
 </div>

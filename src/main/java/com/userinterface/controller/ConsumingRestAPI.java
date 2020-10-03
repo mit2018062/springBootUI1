@@ -150,11 +150,20 @@ public class ConsumingRestAPI {
     }*/
 
     
-    @GetMapping(value = "/Search")
-    public String search(@RequestParam(value = "name") String name, Model model,@PathVariable String pno) {
+    @GetMapping(value = "/Search/{pno}")
+    public String search(@PathVariable String pno, @RequestParam(value = "name") String name, Model model) {
         System.out.println(name);
-        model.addAttribute("patients", patientService.getByFnameAndLname(pno,name));
-        System.out.println("8");
+        PageHandlers page = patientService.getByFnameAndLname(pno,name) ;
+        int i = Integer.parseInt(pno); 
+            
+            System.out.println(i);
+            long totalItems = page.getNumberOfElements();
+            int totalPages = page.getTotalPages();
+            model.addAttribute("name", name);
+            model.addAttribute("currentPage",i);
+            model.addAttribute("totalItems",totalItems);
+            model.addAttribute("totalPages",totalPages-1); 
+	        model.addAttribute("patients", page.getContent());
         return "/patient/searchlist";
     }
 	  @RequestMapping("/patient/new")
