@@ -41,6 +41,7 @@ color:white;
                 <th>Age</th>
                 <th>Gender</th>
 				<!--<th>DOB</th>-->
+                <th></th>
             </tr>
             <tr th:each="patient : ${patients}">
                 <!--<td th:text="${patient.id.toHexString()}"></td>-->
@@ -50,6 +51,7 @@ color:white;
                 <td th:text="${patient.age}"></td>
                 <td th:text="${patient.gender}"></td>
 				<!--<td th:text="${patient.dob}"></td>-->
+                <td><a th:href="${'/patient/delete/' + patient.pid}" class="btn btn-danger btn-xs">Delete</a> </td>
                 
             </tr>
         </table>

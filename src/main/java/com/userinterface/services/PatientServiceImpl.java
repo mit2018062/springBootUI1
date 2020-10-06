@@ -40,7 +40,9 @@ public class PatientServiceImpl implements PatientService {
 	private static String URL = "https://8084-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/list/";
 	private static String URL1 ="https://8084-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/";
 	//private static String URL1 ="http://localhost:8080/patient?firstname=annu";
-	private static String URL3 = "https://8082-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/test?page=0&size=50";
+    private static String URL3 = "https://8082-a2f39654-8660-4baa-bb3f-eac747e3a583.ws-us02.gitpod.io/test?page=0&size=50";
+    
+    
 	 /*@Override
 	public List<Patient> listAll() {
 		   List<Patient> patients = new ArrayList<>();

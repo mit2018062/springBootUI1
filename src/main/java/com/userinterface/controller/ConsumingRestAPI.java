@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,8 @@ public class ConsumingRestAPI {
 	
 	//private static String URL = "http://localhost:8080/patient/list";
 	//private static String URL1 ="http://localhost:8071/patient?name";
-	private static String URL3 = "https://8081-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/";
+    private static String URL3 = "https://8081-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/";
+    private static String URL4 = "https://8081-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/delete/";
 	/*@GetMapping("/patient/list")
 	public Patient getPatients() {
 
@@ -103,7 +105,9 @@ public class ConsumingRestAPI {
     	System.out.println("Inside Controller /");
         return "redirect:/patient/list/0";
     } 
-       
+    
+     
+
 	/*@GetMapping("/patient/list")
 	 public String listPatient(Model model) {
              //System.out.println(restTemplate.getForObject(URL, String.class));
@@ -132,7 +136,12 @@ public class ConsumingRestAPI {
 	        //return restTemplate.getForObject(URL, String.class);
      }
 	   
-        
+    @RequestMapping("/patient/delete/{id}")
+    public String delete(@PathVariable String id){
+        System.out.println(URL4+id);
+        restTemplate.delete(URL4+id);
+        return "redirect:/patient/list/0";
+    }    
 
 	@RequestMapping(value = "/patient/search")
     public String searchName() {
@@ -260,7 +269,8 @@ public class ConsumingRestAPI {
 	        //System.out.println(p);
 	        //return "patient/list";
 	        return restTemplate.getForObject(URL, String.class);
-	 }*/
+     }*/
+     
 	
 	
 	/*@GetMapping("/patient/list")
