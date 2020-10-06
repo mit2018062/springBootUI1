@@ -50,7 +50,7 @@ public class ConsumingRestAPI {
 	
 	//private static String URL = "http://localhost:8080/patient/list";
 	//private static String URL1 ="http://localhost:8071/patient?name";
-	private static String URL3 = "https://8081-dcc8bdb6-a546-4f22-ae00-9d64de6c5237.ws-us02.gitpod.io/patient/";
+	private static String URL3 = "https://8081-f32d5950-80ff-4322-ae13-73b05c1d0bb8.ws-us02.gitpod.io/patient/";
 	/*@GetMapping("/patient/list")
 	public Patient getPatients() {
 
@@ -125,6 +125,7 @@ public class ConsumingRestAPI {
             int totalPages = page.getTotalPages();
             model.addAttribute("currentPage",i);
             model.addAttribute("totalItems",totalItems);
+            model.addAttribute("number",page.getNumber());
             model.addAttribute("totalPages",totalPages-1); 
 	        model.addAttribute("patients", page.getContent());
 	        return "patient/list";
@@ -163,6 +164,7 @@ public class ConsumingRestAPI {
             model.addAttribute("currentPage",i);
             model.addAttribute("totalItems",totalItems);
             model.addAttribute("totalPages",totalPages-1); 
+            model.addAttribute("number",page.getNumber());
 	        model.addAttribute("patients", page.getContent());
         return "/patient/searchlist";
     }
