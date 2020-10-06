@@ -13,7 +13,8 @@
 
     <link href="../../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
-   <!---- <link rel="stylesheet" th:href="@{/css/patientform.css}"/> -->    
+   <!---- <link rel="stylesheet" th:href="@{/css/patientform.css}"/> -->   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
    <style>
 
 .pagination-div{user-select: none;}
@@ -51,7 +52,7 @@ color:white;
                 <td th:text="${patient.age}"></td>
                 <td th:text="${patient.gender}"></td>
 				<!--<td th:text="${patient.dob}"></td>-->
-                <td><a th:href="${'/patient/delete/' + patient.pid}" class="btn btn-danger btn-xs">Delete</a> </td>
+                <td><a th:href="${'/patient/delete/' + patient.pid}" class="btn btn-danger btn-xs"> <i class="fa fa-trash"></i> </a> </td>
                 
             </tr>
         </table>
