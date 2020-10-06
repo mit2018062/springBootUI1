@@ -55,7 +55,7 @@ color:white;
         </table>
     </div>
     <div>&nbsp;</div>
-    <div class="pagination-div">
+    <!--<div class="pagination-div">
         Total Items : [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
         &nbsp; -&nbsp;
 
@@ -66,7 +66,7 @@ color:white;
         <span th:unless= "${currentPage > 0}" >Previous</span>
         &nbsp;
         <span th:each="i: ${#numbers.sequence(0,totalPages)} ">
-            <a th:if="${i != currentPage}" th:href="@{${i}}">[[${i}]] </a> 
+            <a th:if="${i != currentPage}" th:href="@{${i}}" >[[${i}]] </a> 
             <span th:unless="${i != currentPage}" > [[${i}]] </span>
             &nbsp;&nbsp;
         </span>
@@ -76,8 +76,72 @@ color:white;
         &nbsp;&nbsp;
         <a th:if="${currentPage < totalPages}" th:href="@{${totalPages}}">Last</a>
         <span th:unless= "${currentPage < totalPages}" >Last</span>    
-    </div>
+    </div>-->
 
+
+    <nav aria-label="Pagination" th:if="${totalPages gt 0}">
+    <ul class="pagination justify-content-center font-weight-medium">
+        Total Items : [[${totalItems}]] - Page [[${number}]] of [[${totalPages}]]
+        &nbsp; -&nbsp;
+         <li class="page-item" th:classappend="${number eq 0} ? 'disabled'">
+            <!--<a class="page-link svg-icon"
+               th:href="@{${number}(number eq -1 ? 0 : number - 1 )}"
+               
+               aria-label="Previous"
+               title="Previous Page" rel="tooltip">
+               <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true" data-feather="chevrons-left" width="20" height="20"></span>-->
+                <a class="page-link svg-icon"
+                th:if="${currentPage > 0}" th:href="@{${currentPage}-1}">Previous</a>
+                <span th:unless= "${currentPage > 0}" >Previous</span>
+               <span aria-hidden="true">&laquo;</span>
+                
+            </a>
+        </li>
+         <li class="page-item" th:classappend="${i eq number} ? 'active'"
+            th:each="i : ${#numbers.sequence( number, totalPages > 10 + number ? number + 10 : totalPages, 1)}">
+            <a class="page-link" th:href="@{${i}}" th:text="${i}"
+               th:title="${'Page '+ i}"
+               rel="tooltip"></a>
+        </li>
+        <!--<li class="page-item" th:classappend="${i eq number} ? 'active'"
+            th:each="i : ${#numbers.sequence( number,totalPages > 10 + number ? number + 10 : totalPages, 1)}">
+            <a class="page-link" th:href="@{${i}}" th:text="${i}"
+               rel="tooltip"></a>
+        </li>-->
+        <li class="page-item disabled" th:if="${number + 10 < totalPages}">
+            <a class="page-link svg-icon" href="#">
+                <span data-feather="more-horizontal" width="20" height="20"></span>
+            </a>
+        </li>
+        <li class="page-item" th:classappend="${number eq totalPages-1} ? 'disabled'">
+            <a class="page-link svg-icon" th:href="@{${number} + 1}}"
+               aria-label="Next"
+               title="Next Page" rel="tooltip">
+               <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true" data-feather="chevrons-right" width="20" height="20"></span>
+            </a>
+        </li>
+        <!--<li class="page-item" th:classappend="${i eq customers.number + 1} ? 'active'"
+            th:each="i : ${#numbers.sequence( customers.number + 1, customers.totalPages > 10 + customers.number ? customers.number + 10 : customers.totalPages, 1)}">
+            <a class="page-link" th:href="@{/admin/customers?page={id}(id=${i})}" th:text="${i}"
+               th:title="${'Page '+ i}"
+               rel="tooltip"></a>
+        </li>
+        <li class="page-item disabled" th:if="${customers.number + 10 < customers.totalPages}">
+            <a class="page-link svg-icon" href="#">
+                <span data-feather="more-horizontal" width="20" height="20"></span>
+            </a>
+        </li>
+        <li class="page-item" th:classappend="${customers.number + 1 eq customers.totalPages} ? 'disabled'">
+            <a class="page-link svg-icon" th:href="@{/admin/customers?page={id}(id=${customers.number + 2})}"
+               aria-label="Next"
+               title="Next Page" rel="tooltip">
+                <span aria-hidden="true" data-feather="chevrons-right" width="20" height="20"></span>
+            </a>
+        </li>-->
+    </ul>
+    </nav>
     <div class="row">
         <div class="col-sm-3">
             <a href="/patient/new" class="btn btn-success btn-xs">New Patient</a>
