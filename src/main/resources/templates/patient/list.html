@@ -52,7 +52,8 @@ color:white;
                 <td th:text="${patient.age}"></td>
                 <td th:text="${patient.gender}"></td>
 				<!--<td th:text="${patient.dob}"></td>-->
-                <td><a th:href="${'/patient/delete/' + patient.pid}" class="btn btn-danger btn-xs"> <i class="fa fa-trash"></i> </a> </td>
+                <td><a th:href="${'/patient/delete/' + patient.pid}" class="btn btn-danger btn-xs"> <i class="fa fa-trash" ></i> </a> 
+                <a th:href="${'/patient/edit/' + patient.pid}" class="btn btn-primary btn-xs"> <i class="fa fa-edit" ></i> </a> </td>
                 
             </tr>
         </table>
